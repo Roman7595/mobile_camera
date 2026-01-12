@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">mobile_course</string>
+    <string name="type_date_placeholder">type | date</string>
+</resources>

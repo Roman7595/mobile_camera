@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/cameraFragment">
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.mobile_course.fragments.CameraFragment"
+        android:label="camera_fragment"
+        tools:layout="@layout/camera_fragment" >
+        <action
+            android:id="@+id/action_cameraFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.example.mobile_course.fragments.GalleryFragment"
+        android:label="gallery_fragment"
+        tools:layout="@layout/gallery_fragment" >
+        <action
+            android:id="@+id/action_galleryFragment_to_imageFragment"
+            app:destination="@id/imageFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.example.mobile_course.fragments.VideoFragment"
+        android:label="VideoFragment" >
+        <action
+            android:id="@+id/action_videoFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+        <action
+            android:id="@+id/action_videoFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="com.example.mobile_course.fragments.ImageFragment"
+        android:label="ImageFragment" >
+        <argument
+            android:name="MEDIA"
+            app:argType="com.example.mobile_course.MediaFile"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_imageFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+    </fragment>
+</navigation>
