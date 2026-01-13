@@ -216,6 +216,7 @@ class VideoFragment : Fragment() {
             currentRecording = it.output
                 .prepareRecording(requireContext(), mediaStoreOutput)
                 .withAudioEnabled()
+                .asPersistentRecording()
                 .start(ContextCompat.getMainExecutor(requireContext())) { recordEvent ->
                     val chronometer = binding.recordingTime
                     when(recordEvent) {

@@ -204,8 +204,7 @@ class CameraFragment : Fragment() {
 
 
             val resolver = requireContext().contentResolver
-//            val uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-//                values)
+
 
             val outputFileOptions = ImageCapture.OutputFileOptions
                 .Builder(resolver, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
