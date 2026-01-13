@@ -31,7 +31,7 @@ class GalleryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val file = mutableListOf<MediaFile>()
+        val files = mutableListOf<MediaFile>()
         val imageProjection = arrayOf(
             MediaStore.Images.Media._ID,
             MediaStore.Images.Media.DISPLAY_NAME,
@@ -57,7 +57,7 @@ class GalleryFragment : Fragment() {
                 )
                 val creationDate = cursor.getString((cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_ADDED
                 )))
-                file.add(MediaFile(uri.toString(), "image", creationDate))
+                files.add(MediaFile(uri.toString(), "image", creationDate))
             }
         }
 
@@ -89,13 +89,13 @@ class GalleryFragment : Fragment() {
                 )))
 
 
-                file.add(MediaFile(uri.toString(), "video", creationDate))
+                files.add(MediaFile(uri.toString(), "video", creationDate))
             }
         }
 
 
-        file.reverse()
-        val adapter = GalleryAdapter(file){
+        files.reverse()
+        val adapter = GalleryAdapter(files){
             clickedItem ->
             val action = GalleryFragmentDirections.actionGalleryFragmentToImageFragment(
                 MEDIA = clickedItem)

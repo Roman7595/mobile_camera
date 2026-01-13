@@ -27,6 +27,7 @@
     <TextView
         android:id="@+id/zoom_text"
         android:text="1,00"
+        android:textColor="@color/gray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/indent"

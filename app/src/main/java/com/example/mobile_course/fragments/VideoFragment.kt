@@ -78,7 +78,6 @@ class VideoFragment : Fragment() {
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var cameraSelector: CameraSelector
     private var videoCapture: VideoCapture<Recorder>? = null
-
     private var _binding: VideoFragmentBinding? = null
     private val binding: VideoFragmentBinding
         get() = _binding ?: throw RuntimeException()
@@ -107,20 +106,11 @@ class VideoFragment : Fragment() {
             findNavController().navigate(VideoFragmentDirections.actionVideoFragmentToCameraFragment())
         }
 
-        binding.galleryButton.setOnClickListener { view -> findNavController().navigate(R.id.action_videoFragment_to_galleryFragment) }
+        binding.galleryButton.setOnClickListener { view -> findNavController().navigate(
+            VideoFragmentDirections.actionVideoFragmentToGalleryFragment()) }
 
         binding.changeCameraButton.setOnClickListener {
-
-            currentRecording?.pause()
-
-            cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
-                CameraSelector.DEFAULT_FRONT_CAMERA
-            } else {
-                CameraSelector.DEFAULT_BACK_CAMERA
-            }
-            startCamera()
-
-            currentRecording?.resume()
+            switchCamera()
         }
 
         if (allPermissionGranted()) {
@@ -131,6 +121,15 @@ class VideoFragment : Fragment() {
 
     }
 
+
+    private fun switchCamera(){
+        cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+            CameraSelector.DEFAULT_FRONT_CAMERA
+        } else {
+            CameraSelector.DEFAULT_BACK_CAMERA
+        }
+        startCamera()
+    }
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
@@ -140,10 +139,12 @@ class VideoFragment : Fragment() {
                 it.setSurfaceProvider(binding.preview.surfaceProvider)
             }
 
-            val recorder = Recorder.Builder()
-                .setQualitySelector(QualitySelector.from(Quality.HIGHEST))
-                .build()
-            videoCapture = VideoCapture.withOutput(recorder)
+            if (videoCapture == null) {
+                val recorder = Recorder.Builder()
+                    .setQualitySelector(QualitySelector.from(Quality.HIGHEST))
+                    .build()
+                videoCapture = VideoCapture.withOutput(recorder)
+            }
 
             try {
                 cameraProvider.unbindAll()
@@ -255,4 +256,6 @@ class VideoFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
     }
+
+
 }

@@ -1,26 +1,18 @@
 package com.example.mobile_course.fragments
 
 import android.os.Bundle
-import android.view.GestureDetector
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.ViewGroup
 import android.widget.MediaController
-import androidx.activity.addCallback
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.lab1.extensions.debugging
 import com.example.mobile_course.MediaFile
-import com.example.mobile_course.R
 import com.example.mobile_course.databinding.ImageFragmentBinding
-import java.io.File
 import kotlin.getValue
-import kotlin.math.max
-import kotlin.math.min
 
 class ImageFragment : Fragment() {
 

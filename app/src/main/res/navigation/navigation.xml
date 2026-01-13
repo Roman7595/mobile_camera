@@ -45,8 +45,5 @@
             android:name="MEDIA"
             app:argType="com.example.mobile_course.MediaFile"
             app:nullable="true" />
-        <action
-            android:id="@+id/action_imageFragment_to_galleryFragment"
-            app:destination="@id/galleryFragment" />
     </fragment>
 </navigation>

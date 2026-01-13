@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ScaleGestureDetector
 import android.view.View
@@ -29,7 +28,6 @@ import com.example.mobile_course.databinding.CameraFragmentBinding
 import androidx.core.graphics.drawable.toDrawable
 import androidx.navigation.fragment.findNavController
 import com.example.lab1.extensions.debugging
-import com.example.mobile_course.R
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -93,7 +91,6 @@ class CameraFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        println("aaaa "+requireContext().filesDir.absolutePath)
         _binding = CameraFragmentBinding.bind(view)
         imageCaptureExecutor = Executors.newSingleThreadExecutor()
         cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
@@ -107,9 +104,11 @@ class CameraFragment : Fragment() {
             }
         }
 
-        binding.galleryButton.setOnClickListener { view -> findNavController().navigate(R.id.action_cameraFragment_to_galleryFragment) }
+        binding.galleryButton.setOnClickListener { view -> findNavController().navigate(
+            CameraFragmentDirections.actionCameraFragmentToGalleryFragment()) }
 
-        binding.goToVideo.setOnClickListener { view -> findNavController().navigate(R.id.action_cameraFragment_to_videoFragment) }
+        binding.goToVideo.setOnClickListener { view -> findNavController().navigate(
+            CameraFragmentDirections.actionCameraFragmentToVideoFragment()) }
 
         binding.changeCameraButton.setOnClickListener {
             cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
@@ -224,11 +223,6 @@ class CameraFragment : Fragment() {
                     }
 
                     override fun onError(exception: ImageCaptureException) {
-                        Toast.makeText(
-                            binding.root.context,
-                            "Error taking photo",
-                            Toast.LENGTH_LONG
-                        ).show()
                         debugging("Error taking photo:$exception")
                     }
 
